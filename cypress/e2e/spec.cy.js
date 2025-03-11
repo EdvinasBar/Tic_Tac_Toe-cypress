@@ -7,7 +7,7 @@ describe('Basic Gameplay Tests', () => {
 })
 
   
-  it('passes', () => {
+  it('Website Loads correctly', () => {
     cy.visit('http://localhost:5173')
     cy.get('.game h1').should('have.text', 'Tic-Tac-Toe');
   })
@@ -82,6 +82,21 @@ describe('Winning Conditions', () => {
     cy.get('.game h2').should('have.text', 'Winner: X');
     cy.get('.square').eq(3).click();
     cy.get('.square').eq(3).should("not.contain", 'O');
+  })
+
+  it('Detect Draw Game', () => {
+    cy.get('.square').eq(0).click(); //x
+    cy.get('.square').eq(3).click(); //o
+    cy.get('.square').eq(1).click(); //x
+    cy.get('.square').eq(4).click(); //o
+    cy.get('.square').eq(5).click(); //x
+    cy.get('.square').eq(2).click(); //o
+    cy.get('.square').eq(6).click(); //x
+    cy.get('.square').eq(7).click(); //o
+    cy.get('.square').eq(8).click(); //x
+    cy.get('.game h2').should('have.text', 'Draw!');
+
+
   })
 
 })

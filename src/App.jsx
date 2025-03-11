@@ -4,9 +4,10 @@ const App = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
   const [isXNext, setIsXNext] = useState(true);
   const winner = calculateWinner(board);
+  const isDraw = board.every((square) => square !== null) && !winner;
  
   const handleClick = (index) => {
-    if (board[index] || winner) return;
+    if (board[index] || winner || isDraw) return;
  
     const newBoard = [...board];
     newBoard[index] = isXNext ? "X" : "O";
@@ -15,26 +16,26 @@ const App = () => {
   };
  
   const renderSquare = (index) => (
-<button className="square" onClick={() => handleClick(index)}>
+    <button className="square" onClick={() => handleClick(index)}>
       {board[index]}
-</button>
+    </button>
   );
  
   return (
-<div className="game">
-<h1>Tic-Tac-Toe</h1>
-<div className="board">
+    <div className="game">
+      <h1>Tic-Tac-Toe</h1>
+      <div className="board">
         {[0, 1, 2].map((row) => (
-<div key={row} className="board-row">
+          <div key={row} className="board-row">
             {renderSquare(row * 3)}
             {renderSquare(row * 3 + 1)}
             {renderSquare(row * 3 + 2)}
-</div>
+          </div>
         ))}
-</div>
-<h2>{winner ? `Winner: ${winner}` : `Next Player: ${isXNext ? "X" : "O"}`}</h2>
-<button className="reset" onClick={() => setBoard(Array(9).fill(null))}>Reset</button>
-<style>
+      </div>
+      <h2>{winner ? `Winner: ${winner}` : isDraw ? "Draw!" : `Next Player: ${isXNext ? "X" : "O"}`}</h2>
+      <button className="reset" onClick={() => setBoard(Array(9).fill(null))}>Reset</button>
+      <style>
         {`
           .game { text-align: center; font-family: Arial, sans-serif; }
           .board { display: flex; flex-direction: column; align-items: center; }
@@ -42,8 +43,8 @@ const App = () => {
           .square { width: 60px; height: 60px; font-size: 24px; text-align: center; margin: 2px; cursor: pointer; border: 2px solid black; }
           .reset { margin-top: 10px; padding: 8px 16px; font-size: 16px; cursor: pointer; }
         `}
-</style>
-</div>
+      </style>
+    </div>
   );
 };
  
