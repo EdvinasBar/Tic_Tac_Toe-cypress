@@ -32,4 +32,4 @@ jobs:
     - name: Start React App In Background
       run: npm dev &
 
-    - run: npm run cy:cli
+    - run: npx cypress run
