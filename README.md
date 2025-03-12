@@ -1,12 +1,97 @@
-# React + Vite
+# Tic-Tac-Toe Cypress Testing
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains automated tests for a Tic-Tac-Toe game using [Cypress](https://www.cypress.io/), a modern JavaScript-based testing framework for web applications.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Project Overview](#project-overview)
+- [Installation](#installation)
+- [Running Tests](#running-tests)
+- [Folder Structure](#folder-structure)
+- [Writing Tests](#writing-tests)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Expanding the ESLint configuration
+## Project Overview
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The project tests the core functionality of a Tic-Tac-Toe web application using Cypress. It includes UI interaction tests, game logic validation, and edge case handling to ensure the game runs smoothly across different scenarios.
+
+## Installation
+
+### Prerequisites
+
+- Node.js (latest LTS version recommended)
+- npm or yarn installed globally
+
+### Setup Instructions
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/EdvinasBar/Tic_Tac_Toe-cypress.git
+   cd Tic_Tac_Toe-cypress
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   # or
+   yarn install
+   ```
+
+## Running Tests
+
+To execute Cypress tests, use the following commands:
+
+### Run Cypress in Headless Mode
+
+```sh
+npx cypress run
+```
+
+### Run Cypress in Interactive Mode
+
+```sh
+npx cypress open
+```
+
+This opens the Cypress Test Runner, allowing you to select and run individual test cases.
+
+## Folder Structure
+
+```
+Tic_Tac_Toe-cypress/
+│── cypress/
+│   ├── fixtures/       # Test data files
+│   ├── integration/    # Cypress test files
+│   ├── plugins/        # Cypress plugins
+│   ├── support/        # Custom commands and utilities
+│── cypress.json        # Cypress configuration file
+│── package.json        # Project dependencies
+│── README.md           # Project documentation
+```
+
+## Writing Tests
+
+Cypress tests are written in JavaScript within the `cypress/integration/` folder. Example test:
+
+```js
+  it('Player Moves', () => {
+    cy.get('.square').each(($el, index) => {
+    cy.wrap($el).click();
+    cy.get('.reset').click();
+    });
+    
+  })
+```
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues and submit pull requests.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+Happy testing! 🚀
+
